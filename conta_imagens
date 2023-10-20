@@ -1,0 +1,41 @@
+import pdfplumber
+import os
+
+def count_large_images(pdf_path, min_width, min_height):
+    count = 0
+    with pdfplumber.open(pdf_path) as pdf:
+        for page in pdf.pages:
+            for img in page.images:
+                if img["width"] >= min_width and img["height"] >= min_height:
+                    count += 1
+    return count
+
+# Lista de caminhos para os arquivos PDF que deseja analisar
+pdf_paths = [
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/edicoes_SM/IMLE0000060102P240100020020_CARA(matematica).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_AJS /IMLE0000060111P240100207030_CARA(ciencias).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_ATICA/IMLE0000060050P240100200090_CARA(ingles).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_BRASIL/IMLE0000060063P240100207030_CARA(ciencias).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_CAROCHINHA/IMLE0000060108P240100208050_CARA(geografia).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_FTD/IMLE0000060001P240100200010_CARA(lingua_port).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_GRAFICA_INDICO /IMLE0000060097P240100207030_CARA(ciencias).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_IBEP/IMLE0000060088P240100208050_CARA_AAF(geografia).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_MODERNA/IMLE0000060026P240100208040_CARA(historia).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_PALAVRAS/IMLE0000060093P240100208040(historia).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_PANTOGRAF/IMLE0000060107P240100208050_CARA(geografia).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_RICHMOND/IMLE0000060003P240100200090_CARA(ingles).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_SARAIVA/IMLE0000060041P240100200060_CARA(Artes).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_SCIPIONE/IMLE0000060032P240100200060_CARA(arte).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_SEI/IMLE0000060105P240100200010_CARA(ling_port).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_UNIVERSO/IMLE0000060109P240100207030_CARA(ciencias).pdf',
+    '/content/drive/MyDrive/Mestrado PNLD/Obras - Objeto 1-2024(amostra)/editora_WISDOM/IMLE0000060113P240100020020_CARA(matematica).pdf'
+]
+
+min_width = 50  # Defina a largura mínima desejada para as imagens
+min_height = 50  # Defina a altura mínima desejada para as imagens
+
+# Itera sobre a lista de caminhos dos arquivos PDF e exibe o nome do arquivo junto com a quantidade
+for pdf_path in pdf_paths:
+    num_images = count_large_images(pdf_path, min_width, min_height)
+    file_name = os.path.basename(pdf_path)
+    print(f'Número de imagens no arquivo {file_name} com tamanho mínimo de {min_width}x{min_height}: {num_images}')
