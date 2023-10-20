@@ -1,4 +1,3 @@
-# mestrado
 # Contador de Imagens em Arquivos PDF
 
 Este é um script Python que conta o número de imagens em arquivos digitais, como arquivos PDF. Ele exclui automaticamente imagens com dimensões menores que 50x50 pixels, pois essas geralmente representam figuras que complementam bordas ou molduras das páginas e não são relevantes para análises.
